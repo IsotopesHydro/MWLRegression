@@ -90,7 +90,7 @@ YorkRegression <- function(Xi, Yi, sXi, sYi, iter = 100, plot = F){ ##### Initia
   
   MAE_X <- mean(abs(ResXi)) # mean absolute error on X
   MAE_Y <- mean(abs(ResYi)) # mean absolute error on Y
-  MAEavg <- (MAE_X + MAE_Y)/2 # average mean absolute error
+  MAEdiag <- sqrt(MAE_X^2 + MAE_Y^2) # diagonal mean absolute error
   
   SSres <- sum((Yi-yi)^2) # The sum of squares of residuals
   SStot <- sum((Yi-mean(Yi))^2) # The total sum of squares
@@ -139,7 +139,7 @@ YorkRegression <- function(Xi, Yi, sXi, sYi, iter = 100, plot = F){ ##### Initia
               bVect) # results to return
   names(res) <- c("Xi and Yi provided uncertanties:", 
                   "York Slope", "York Intercept", "Expected xi", "Expected xi", "X-residuals", "Y-residuals", 
-                  "Rsquared", "Mean Absolute Error on X", "Mean Absolute Error on Y", "Average Mean Absolute Error",
+                  "Rsquared", "Mean Absolute Error on X", "Mean Absolute Error on Y", "Diagonal Mean Absolute Error",
                   "Slope uncertainty", "Intercept uncertainty", "S", "Q", "df",
                   "Iterated slope values")
   return(res)

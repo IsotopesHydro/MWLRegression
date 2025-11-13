@@ -65,12 +65,15 @@ RegEqualSigma <- function(Xi, Yi, sXi, sYi, plot = F){
     Sb2 <- (1/sum(Wi*ui^2)) # error on estimated slope 
     Sa2 <- (1/sum(Wi))+(x^2)*Sb2 # error on estimated intercept
 
+    Sb <- sqrt(Sb2)
+    Sa <- sqrt(Sa2)
+    
     ResXi <- Xi-xi # residuals
     ResYi <- Yi-yi
     
     MAE_X <- mean(abs(Xi-xi)) # mean absolute error on X
     MAE_Y <- mean(abs(Yi-yi)) # mean absolute error on Y
-    MAEavg <- (MAE_X + MAE_Y)/2 # average mean absolute error
+    MAEdiag <- sqrt(MAE_X^2 + MAE_Y^2) # diagonal mean absolute error
     
     SSres <- sum((ResYi)^2) # The sum of squares of residuals
     SStot <- sum((Yi-mean(Yi))^2) # The total sum of squares
@@ -79,8 +82,8 @@ RegEqualSigma <- function(Xi, Yi, sXi, sYi, plot = F){
     
     res <- list(warnsigmaEqualityCheck,
                 b,a,xi,yi,ResXi,ResYi,
-                Rsquared,MAE_X,MAE_y,MAEavg,
-                sqrt(Sb2),sqrt(Sa2),S,Q,length(Xi)-2) # results to return
+                Rsquared,MAE_X,MAE_y,MAEdiag,
+                Sb,Sa,S,Q,length(Xi)-2) # results to return
     
   }else{
     warnsigmaEqualityCheck <- " DIFFERS. You MUST use YorkRegression()"
@@ -94,11 +97,14 @@ RegEqualSigma <- function(Xi, Yi, sXi, sYi, plot = F){
     MAE_X <- NULL
     MAE_y <- NULL
     MAEavg <- NULL
-    sqrt(Sb2) <- NULL
-    sqrt(Sa2) <- NULL
+    Sb <- NULL
+    Sa <- NULL
     S <- NULL
     Q <- NULL
-    res <- list(warnsigmaEqualityCheck,b,a,xi,yi,ResXi,ResYi,sqrt(Sb2),sqrt(Sa2),S,Q,length(Xi)-2) # results to return
+    res <- list(warnsigmaEqualityCheck,
+                b,a,xi,yi,ResXi,ResYi,
+                Rsquared,MAE_X,MAE_y,MAEdiag,
+                Sb,Sa,S,Q,length(Xi)-2) # results to return
   }
   
   names(res) <- c("Xi and Yi provided uncertanties:", 

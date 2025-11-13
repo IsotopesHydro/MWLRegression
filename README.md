@@ -8,7 +8,7 @@ The package was developed in the framework of regression of water stable isotope
 You can install this through use devtools:
 
 ```r
-devtools::install_github(" IsotopesHydro/MWLRegression")
+devtools::install_github("IsotopesHydro/MWLRegression")
 ```
 
 

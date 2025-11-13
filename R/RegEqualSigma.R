@@ -18,7 +18,7 @@
 #' @return Expected xi and Expected yi - Expected x and x values, 
 #' @return ResXi,ResYi - Residuals of all Xi and Yi measurement respect to the corresponding expected xi and yi,
 #' @return Rsquared - Coefficient of determinaton on the computed linear model,
-#' @return MAE_X,MAE_y,MAEavg - Mean Absolute Error on X and Y directions and Average Mean Absolute Error,
+#' @return MAE_X,MAE_y,MAEdiag - Mean Absolute Error on X and Y directions and Diagonal Mean Absolute Error,
 #' @return sqrt(Sb2),sqrt(Sa2) - Uncertainty on slope and intercept,
 #' @return S - the minimized sum of squared weighted residuals,
 #' @return Q - probability of obtaining the computed S value or higher for the relative Chi-Squared density function for the corresponding DF,

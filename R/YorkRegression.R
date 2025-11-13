@@ -22,7 +22,7 @@
 #' @return Xi-xi,Yi-yi - Residuals of all Xi and Yi measurement respect to the corresponding expected xi and yi,
 #' @return sqrt(Sb2),sqrt(Sa2) - Uncertainty on slope and intercept,
 #' @return Rsquared - Coefficient of determinaton on the computed linear model,
-#' @return MAE_X,MAE_y,MAEavg - Mean Absolute Error on X and Y directions and Average Mean Absolute Error,
+#' @return MAE_X,MAE_y,MAEdiag - Mean Absolute Error on X and Y directions and Diagonal Mean Absolute Error,
 #' @return S - the minimized sum of squared weighted residuals,
 #' @return Q - probability of obtaining the computed S value or higher for the relative Chi-Squared density function for the corresponding DF,
 #' @return length(Xi)-2 - the DF degrees of freedom,
@@ -133,7 +133,7 @@ YorkRegression <- function(Xi, Yi, sXi, sYi, iter = 100, plot = F){ ##### Initia
   
   res <- list(warnsigmaEqualityCheck,
               b,a,xi,yi,ResXi,ResYi,
-              Rsquared,MAE_X,MAE_Y,MAEavg,
+              Rsquared,MAE_X,MAE_Y,MAEdiag,
               sqrt(Sb2),sqrt(Sa2),
               S,Q,length(Xi)-2,
               bVect) # results to return

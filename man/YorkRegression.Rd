@@ -35,7 +35,7 @@ sqrt(Sb2),sqrt(Sa2) - Uncertainty on slope and intercept,
 
 Rsquared - Coefficient of determinaton on the computed linear model,
 
-MAE_X,MAE_y,MAEavg - Mean Absolute Error on X and Y directions and Average Mean Absolute Error,
+MAE_X,MAE_y,MAEdiag - Mean Absolute Error on X and Y directions and Diagonal Mean Absolute Error,
 
 S - the minimized sum of squared weighted residuals,
 

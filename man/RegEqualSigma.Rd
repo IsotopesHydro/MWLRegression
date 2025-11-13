@@ -31,7 +31,7 @@ ResXi,ResYi - Residuals of all Xi and Yi measurement respect to the correspondin
 
 Rsquared - Coefficient of determinaton on the computed linear model,
 
-MAE_X,MAE_y,MAEavg - Mean Absolute Error on X and Y directions and Average Mean Absolute Error,
+MAE_X,MAE_y,MAEdiag - Mean Absolute Error on X and Y directions and Diagonal Mean Absolute Error,
 
 sqrt(Sb2),sqrt(Sa2) - Uncertainty on slope and intercept,
 

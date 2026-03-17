@@ -2,8 +2,8 @@
 #' 
 #' This code implements a function to perform linear regression on x and y data which as equal measurement 
 #' uncertainties. The function depend on 'ggplot2' for plotting.
-#' The function RegEqualSigma() require the following parameters.
 #' 
+#' The function RegEqualSigma() require the following parameters:
 #' @param Xi Numeric vector containing the x variable measured values
 #' @param Yi Numeric vector containing the y variable measured values 
 #' @param sXi Numeric vector containing the uncertainties of the x measured values
@@ -14,7 +14,7 @@
 #'                                                   as a vertical red line.
 #'
 #' The functions returns:
-#' @return York slope and York intercept of York regression,
+#' @return Slope and intercept of regression,Xi-xi,Yi-yi,sqrt(Sb2),sqrt(Sa2),S,Q,length(Xi)-2.
 #' @return Expected xi and Expected yi - Expected x and x values, 
 #' @return ResXi,ResYi - Residuals of all Xi and Yi measurement respect to the corresponding expected xi and yi,
 #' @return Rsquared - Coefficient of determinaton on the computed linear model,
@@ -27,7 +27,7 @@
 #' @export
 RegEqualSigma <- function(Xi, Yi, sXi, sYi, plot = F){
   
-  sigmaEqualityCheck <- sum((sXi[1] != sXi[2:length(sXi)]), (sYi[1] != sYi[2:length(sYi)]))
+  sigmaEqualityCheck <- sum((sXi[1] != sXi[2:length(sXi)]), (sYi[1] != sYi[2:length(sYi)])) # Here we check if sigmas (uncertanities) are equal for x and y
   warnsigmaEqualityCheck <- character()
   if(sigmaEqualityCheck == 0){
     
@@ -50,20 +50,22 @@ RegEqualSigma <- function(Xi, Yi, sXi, sYi, plot = F){
     S <- W*sum((Yi-(a+b*Xi))^2)
     Q <- 1-pchisq(S,N-2)
     
-    # Use the observed points (Xi ,Yi) and Wi to calculate  ̄X  and  ̄Y , from which Ui and Vi , and hence bi can be evaluated for each point
-    X <- (sum(Wi*Xi))/(sum(Wi))
-    Y <- (sum(Wi*Yi))/(sum(Wi))
+    # Use the observed points (Xi ,Yi) and W to calculate  ̄X  and  ̄Y , from which Ui and Vi , and hence bi can be evaluated for each point
+    X <- (sum(W*Xi))/(sum(W))
+    Y <- (sum(W*Yi))/(sum(W))
     Ui <- Xi - X
     Vi <- Yi - Y
-    BETAi <- Wi*((Ui/wYi)+((bVect[i]*Vi)/wXi)-(bVect[i]*Ui+Vi)*(ri/alphai))
+    wXi <- (1/sXi^2)
+    wYi <- (1/sYi^2)
+    BETAi <- W*((Ui/wYi)+((b[i]*Vi)/wXi)-(b[i]*Ui+Vi)*(ri/alphai))
     xi <- X + BETAi # expectation for the Xi values 
     yi <- Y + b*BETAi # expectation for the Yi values 
-    x <- (sum(Wi*xi))/(sum(Wi))
-    y <- (sum(Wi*yi))/(sum(Wi))
+    x <- (sum(W*xi))/(sum(W))
+    y <- (sum(W*yi))/(sum(W))
     ui <- xi - x
     vi <- yi - y
-    Sb2 <- (1/sum(Wi*ui^2)) # error on estimated slope 
-    Sa2 <- (1/sum(Wi))+(x^2)*Sb2 # error on estimated intercept
+    Sb2 <- (1/sum(W*ui^2)) # error on estimated slope 
+    Sa2 <- (1/sum(W))+(x^2)*Sb2 # error on estimated intercept
 
     Sb <- sqrt(Sb2)
     Sa <- sqrt(Sa2)

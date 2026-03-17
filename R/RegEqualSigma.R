@@ -14,7 +14,7 @@
 #'                                                   as a vertical red line.
 #'
 #' The functions returns:
-#' @return York slope and York intercept of York regression,Xi-xi,Yi-yi,sqrt(Sb2),sqrt(Sa2),S,Q,length(Xi)-2, bVect
+#' @return York slope and York intercept of York regression,
 #' @return Expected xi and Expected yi - Expected x and x values, 
 #' @return ResXi,ResYi - Residuals of all Xi and Yi measurement respect to the corresponding expected xi and yi,
 #' @return Rsquared - Coefficient of determinaton on the computed linear model,

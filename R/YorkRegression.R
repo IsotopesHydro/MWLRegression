@@ -10,6 +10,7 @@
 #' @param Yi Numeric vector containing the y variable measured values 
 #' @param sXi Numeric vector containing the uncertainties of the x measured values
 #' @param sYi Numeric vector containing the uncertainties of the y measured values
+#' @param ri The correlation coefficient between the errors on X and Y
 #' @param iter Number of iterations to be performed, default is 100
 #' @param plot Default False. Will return plots if True of: i) iterativly computed b values against iteration number,
 #'                                              ii) Y vs X plot with the OLS regression in blue and York linear regression in red,
@@ -29,7 +30,7 @@
 #' @return bVect - Iterations of b value computation.
 #' 
 #' @export
-YorkRegression <- function(Xi, Yi, sXi, sYi, iter = 100, plot = F){ ##### Initialize the function to perform LSE York regression
+YorkRegression <- function(Xi, Yi, sXi, sYi, ri = 10^-20, iter = 100, plot = F){ ##### Initialize the function to perform LSE York regression
   
   sigmaEqualityCheck <- sum((sXi[1] != sXi[2:length(sXi)]), (sYi[1] != sYi[2:length(sYi)]))
   warnsigmaEqualityCheck <- character()
@@ -50,8 +51,6 @@ YorkRegression <- function(Xi, Yi, sXi, sYi, iter = 100, plot = F){ ##### Initia
   wYi <- 1/(sYi^2) # Yi weights equal to 1 / Yi error 
   
   options(warn=-1)
-  ifelse(is.na(cor(sXi, sYi)), yes = ri <- 10^-20, no = ri <- cor(sXi, sYi)) # estimate correlation between errors in X and Y. If the errors are equal for all Xi and Yi respectively,
-  options(warn=0)                                                                    # then function corr() gives an 'NA' result, in this case the 'ri' is set = 10^-20
   
   alphai <- sqrt(wXi*wYi) # compute parameter alpha
   
